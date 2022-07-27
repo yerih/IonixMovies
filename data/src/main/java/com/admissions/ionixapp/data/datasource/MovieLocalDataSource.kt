@@ -8,4 +8,5 @@ interface MovieLocalDataSource {
     suspend fun findById(id: Int): Movie
     suspend fun isEmpty(): Boolean
     suspend fun save(movie: Movie)
+    suspend fun saveMovies(movies: List<Movie>)
 }

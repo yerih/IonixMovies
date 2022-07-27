@@ -1,5 +1,6 @@
 package com.admissions.ionixapp.ui.main
 
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.admissions.ionixapp.common.launch
 import com.admissions.ionixapp.common.log
@@ -22,26 +23,23 @@ class MainViewModel @Inject constructor(
         val requestPermissionLocation: Boolean = true,
         val error: String = ""
     )
-
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        launch(Dispatchers.IO) {
             val result = moviesUseCase.getPopularMovies()
-            if(result.isError)return@launch
+            if(result.isError){
+                _state.update { it.copy(error = result.error.toString()) }
+                return@launch
+            }
             val list = result.result!!.toMutableList()
-            _state.update { it.copy(list = list) }
+            _state.update { UiState(list = list) }
         }
 
     }
 
-    fun onUiReady(){
-        viewModelScope.launch {
-        }
-    }
-
-    fun start() { log("start")}
+    fun onUiReady(){}
 
 }
 

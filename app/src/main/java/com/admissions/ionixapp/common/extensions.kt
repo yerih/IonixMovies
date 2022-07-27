@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
@@ -75,6 +76,7 @@ fun Fragment.buildMainState(
 
 fun ViewModel.launch(dispatcher: CoroutineDispatcher = Dispatchers.Main, launch: suspend () -> Unit){ viewModelScope.launch(dispatcher){launch()} }
 
+fun Fragment.toast(msg: String, duration: Int = Toast.LENGTH_SHORT): Unit = Toast.makeText(context, msg, duration).show()
 
 
 

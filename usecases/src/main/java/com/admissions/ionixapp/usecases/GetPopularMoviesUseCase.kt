@@ -12,4 +12,5 @@ class GetPopularMoviesUseCase(
     suspend fun getPopularMovies() = repository.getPopularMovies()
     suspend fun isEmptyDB() = repository.isEmptyDB()
     suspend fun save(movie: Movie) = repository.save(movie)
+    suspend fun saveMovies(movies: List<Movie>) = repository.saveMovies(movies)
 }

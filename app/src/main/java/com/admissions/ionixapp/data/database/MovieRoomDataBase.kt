@@ -10,8 +10,9 @@ import javax.inject.Inject
 class MovieRoomDataBase @Inject constructor(private val movieDao: MovieDao) : MovieLocalDataSource {
     override suspend fun getAll(): List<Movie> = movieDao.getAll().map { it.toDomainModel() }
     override suspend fun findById(id: Int): Movie = movieDao.findById(id).toDomainModel()
-    override suspend fun isEmpty(): Boolean = movieDao.getAll().isEmpty()
+    override suspend fun isEmpty(): Boolean = movieDao.movieCount() == 0
     override suspend fun save(movie: Movie) = movieDao.insertMovie(movie.toEntityDB())
+    override suspend fun saveMovies(movies: List<Movie>) = movieDao.insertMovies(movies.toEntityDB())
 
 }
 

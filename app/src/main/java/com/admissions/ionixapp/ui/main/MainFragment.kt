@@ -22,7 +22,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view).apply { recycler.adapter = adapter }
         mainState = buildMainState()
-        mViewModel.start()
 
         launchAndCollect(mViewModel.state){ state -> binding.uiState = state }
         mainState.requestLocationPermission { mViewModel.onUiReady() }
