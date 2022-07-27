@@ -2,23 +2,29 @@ package com.admissions.ionixapp.data.server
 
 
 import com.google.gson.GsonBuilder
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
 import java.util.concurrent.TimeUnit
 
 
 interface MoviesService {
 
     companion object{
-        private const val urlBase = "https://imdb-api.com/en/API/InTheaters/"
-        private const val apiKey = "3721d069f6msh0c5a39eb6075f50p1943b3jsn7e3ed9ab083c"
+        private const val urlBase = "https://imdb-api.com/en/"
+        private const val GET_POPULAR_MOVIES = "API/InTheaters/k_4ggkrp0h"
 
         private val okHttpClient1: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.MINUTES)
             .readTimeout(90, TimeUnit.SECONDS)
             .writeTimeout(90, TimeUnit.SECONDS)
+            .addInterceptor( OkHttpProfilerInterceptor())
             .build()
 
         private val gson = GsonBuilder().setLenient().create()
@@ -35,6 +41,7 @@ interface MoviesService {
     }
 
 
+    @GET(GET_POPULAR_MOVIES)
+    suspend fun getPopularMovies(): GetPopularMoviesResponse
 }
-
 

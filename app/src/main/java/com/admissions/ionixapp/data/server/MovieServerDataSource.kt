@@ -1,5 +1,6 @@
 package com.admissions.ionixapp.data.server
 
+import com.admissions.ionixapp.common.asMovies
 import com.admissions.ionixapp.data.datasource.MovieRemoteDataSource
 import com.admissions.ionixapp.domain.Movie
 import com.admissions.ionixapp.domain.Result
@@ -9,24 +10,20 @@ import javax.inject.Inject
 
 
 class MovieServerDataSource @Inject constructor(private val locationHelper: LocationHelper) : MovieRemoteDataSource {
-    override suspend fun getPopularMovies(): Result<Movie> {
+    override suspend fun getPopularMovies(): Result<List<Movie>> {
         return try {
-            Result(null, Error() )
+            val response = MoviesService.service.getPopularMovies()
+//            val response = MovieApi.retrofitMovieService.getPopularMovies()
+            Result(response.items.asMovies(), Error() )
         }catch (httpExec: HttpException) {
-            Result(null, Error())
+            Result(null, Error(httpExec.message.toString()))
         }catch (e: Exception) {
             Result(null, Error(e.message))
         }
     }
 
     override suspend fun getMovieInfo(movie: Movie): Result<Movie> {
-        return try {
-            Result(null, Error() )
-        }catch (httpExec: HttpException) {
-            Result(null, Error())
-        }catch (e: Exception) {
-            Result(null, Error(e.message))
-        }
+        return Result(null, Error("not available") )
     }
 
 

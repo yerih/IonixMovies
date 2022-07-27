@@ -1,8 +1,12 @@
 package com.admissions.ionixapp.ui.main
 
 import androidx.lifecycle.*
+import com.admissions.ionixapp.common.launch
+import com.admissions.ionixapp.common.log
+import com.admissions.ionixapp.domain.Movie
 import com.admissions.ionixapp.usecases.GetPopularMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +18,7 @@ class MainViewModel @Inject constructor(
 
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<com.admissions.ionixapp.domain.Movie>? = null,
+        val list: List<Movie> = mutableListOf(),
         val requestPermissionLocation: Boolean = true,
         val error: String = ""
     )
@@ -24,13 +28,22 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            val result = moviesUseCase.getPopularMovies()
+            log("result is error = ${result.isError}")
+            if(result.isError)return@launch
+            val list = result.result!!.toMutableList()
+            log("list = $list")
+            _state.update { it.copy(list = list) }
         }
+
     }
 
     fun onUiReady(){
         viewModelScope.launch {
         }
     }
+
+    fun start() { log("start")}
 
 }
 

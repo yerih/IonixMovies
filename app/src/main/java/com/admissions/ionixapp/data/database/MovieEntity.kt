@@ -9,11 +9,14 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val name: String = "",
-    val biography: String = "",
-    val publishingDate: String = "",
-    val imageUrl: String = "",
-    val favorite: Boolean = false
+    @PrimaryKey
+    val fullTitle: String,
+    val genres: String,
+    val id: String,
+    val image: String,
+    val plot: String,
+    val releaseState: String,
+    val stars: String,
+    val title: String,
+    val year: String
 ) : Parcelable

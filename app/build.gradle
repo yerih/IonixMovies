@@ -94,4 +94,6 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
 
+    //Plugin de Http
+    implementation 'com.localebro:okhttpprofiler:1.0.8'
 }

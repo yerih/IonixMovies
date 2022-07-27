@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        app:loadUrl="@{movie.imageUrl}"
+                        app:loadUrl="@{``}"
                         app:ratio="1.5"
                         tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -48,8 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="top|end"
                         android:layout_margin="4dp"
-                        android:src="@drawable/ic_favorite_true"
-                        app:visible="@{movie.favorite}" />
+                        android:src="@drawable/ic_favorite_true"/>
 
                 </FrameLayout>
 
@@ -73,7 +72,7 @@
                     android:padding="6dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
                     android:textColor="@color/white"
-                    android:text="@{movie.name}"
+                    android:text="@{movie.title}"
                     tools:text="@tools:sample/lorem" />
             </androidx.cardview.widget.CardView>
 

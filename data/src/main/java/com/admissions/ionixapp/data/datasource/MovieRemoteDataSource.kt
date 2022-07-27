@@ -5,6 +5,6 @@ import com.admissions.ionixapp.domain.Result
 
 
 interface MovieRemoteDataSource {
-    suspend fun getPopularMovies(): Result<Movie>
+    suspend fun getPopularMovies(): Result<List<Movie>>
     suspend fun getMovieInfo(movie: Movie): Result<Movie>
 }

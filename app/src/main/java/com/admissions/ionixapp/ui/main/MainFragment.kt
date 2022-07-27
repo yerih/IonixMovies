@@ -13,17 +13,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by viewModels()
+    private lateinit var  binding: FragmentMainBinding
+    private val mViewModel: MainViewModel by viewModels()
     private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
     private lateinit var mainState: MainState
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentMainBinding.bind(view).apply { recycler.adapter = adapter }
+        binding = FragmentMainBinding.bind(view).apply { recycler.adapter = adapter }
         mainState = buildMainState()
-        viewLifecycleOwner.launchAndCollect(viewModel.state){
-        }
-        mainState.requestLocationPermission { viewModel.onUiReady() }
+        requireActivity().setTheme(R.style.Theme_IonixApp)
+        mViewModel.start()
+
+        launchAndCollect(mViewModel.state){ state -> binding.uiState = state }
+        mainState.requestLocationPermission { mViewModel.onUiReady() }
     }
 
 }

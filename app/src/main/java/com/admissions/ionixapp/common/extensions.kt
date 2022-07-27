@@ -19,7 +19,9 @@ import com.admissions.ionixapp.R
 import com.admissions.ionixapp.ui.common.PermissionRequester
 import com.admissions.ionixapp.ui.main.MainState
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -75,6 +77,7 @@ fun Fragment.buildMainState(
     )
 ) = MainState(requireContext(), scope, navController, locationPermissionRequester)
 
+fun ViewModel.launch(dispatcher: CoroutineDispatcher = Dispatchers.Main, launch: suspend () -> Unit){ viewModelScope.launch(dispatcher){launch()} }
 
 
 

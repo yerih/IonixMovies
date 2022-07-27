@@ -10,22 +10,18 @@
         android:name="com.admissions.ionixapp.ui.main.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
+
         <action
-            android:id="@+id/action_main_to_detail"
+            android:id="@+id/action_main_dest_to_detail_dest"
             app:destination="@id/detail_dest"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
-        </action>
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/detail_dest"
         android:name="com.admissions.ionixapp.ui.detail.DetailFragment"
         tools:layout="@layout/fragment_detail"
-        android:label="DetailFragment" >
-        <argument
-            android:name="artistId"
-            app:argType="integer" />
-    </fragment>
+        android:label="DetailFragment" />
 </navigation>

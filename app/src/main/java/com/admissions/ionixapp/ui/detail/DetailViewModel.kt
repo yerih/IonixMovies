@@ -14,7 +14,7 @@ class DetailViewModel @Inject constructor(
     private val moviesUseCase: GetPopularMoviesUseCase,
 ) : ViewModel() {
 
-    private val artistId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).artistId
+//    private val artistId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).artistId
 
     data class UiState(val movie: Movie? = null, val error: Error? = null)
     private val _state = MutableStateFlow(UiState())

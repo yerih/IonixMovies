@@ -50,7 +50,7 @@ object AppModule {
 class DataModule {
 
     @Provides
-    fun moviesRepositoryProvider(localDataSource: MovieRoomDataBase, remoteDataSource: MovieServerDataSource) = MoviesRepository(localDataSource, remoteDataSource)
+    fun moviesRepositoryProvider(localDataSource: MovieRoomDataBase, remoteDataSource: MovieRemoteDataSource) = MoviesRepository(localDataSource, remoteDataSource)
 }
 
 @Module
