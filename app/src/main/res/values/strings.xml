@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MusicToday</string>
+    <string name="app_name">IonixApp</string>
     <string name="connectivity_error">Connectivity error</string>
     <string name="server_error">Server error</string>
     <string name="unknown_error">Unknown error</string>

@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NavHostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Logger.addLogAdapter(AndroidLogAdapter())
+//        setTheme(R.style.Theme_IonixApp)
         setContentView(R.layout.activity_nav_host)
     }
 }

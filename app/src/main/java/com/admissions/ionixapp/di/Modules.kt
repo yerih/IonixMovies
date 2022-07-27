@@ -8,11 +8,9 @@ import com.admissions.ionixapp.data.database.MovieDao
 import com.admissions.ionixapp.data.database.MovieDataBase
 import com.admissions.ionixapp.data.database.MovieRoomDataBase
 import com.admissions.ionixapp.data.datasource.MovieRemoteDataSource
-import com.admissions.ionixapp.data.datasource.MovieLocalDataSource
 import com.admissions.ionixapp.data.server.MovieServerDataSource
 import com.admissions.ionixapp.ui.common.LocationHelper
 import com.admissions.ionixapp.usecases.GetPopularMoviesUseCase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,7 +48,7 @@ object AppModule {
 @Module
 @InstallIn(SingletonComponent::class)
 class DataModule {
-    
+
     @Provides
     fun moviesRepositoryProvider(localDataSource: MovieRoomDataBase, remoteDataSource: MovieServerDataSource) = MoviesRepository(localDataSource, remoteDataSource)
 }
