@@ -1,6 +1,7 @@
 package com.admissions.ionixapp.data.server
 
 import com.admissions.ionixapp.common.asMovies
+import com.admissions.ionixapp.common.log
 import com.admissions.ionixapp.data.datasource.MovieRemoteDataSource
 import com.admissions.ionixapp.domain.Movie
 import com.admissions.ionixapp.domain.Result
@@ -13,11 +14,14 @@ class MovieServerDataSource @Inject constructor(private val locationHelper: Loca
     override suspend fun getPopularMovies(): Result<List<Movie>> {
         return try {
             val response = MoviesService.service.getPopularMovies()
-//            val response = MovieApi.retrofitMovieService.getPopularMovies()
-            Result(response.items.asMovies(), Error() )
+            Result(response.results.asMovies(), null)
         }catch (httpExec: HttpException) {
-            Result(null, Error(httpExec.message.toString()))
+            val error = httpExec.message.toString()
+            log("error http = $error")
+            Result(null, Error())
         }catch (e: Exception) {
+            val error = e.message.toString()
+            log("error = $error")
             Result(null, Error(e.message))
         }
     }

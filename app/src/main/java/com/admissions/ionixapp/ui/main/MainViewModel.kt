@@ -29,10 +29,8 @@ class MainViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val result = moviesUseCase.getPopularMovies()
-            log("result is error = ${result.isError}")
             if(result.isError)return@launch
             val list = result.result!!.toMutableList()
-            log("list = $list")
             _state.update { it.copy(list = list) }
         }
 

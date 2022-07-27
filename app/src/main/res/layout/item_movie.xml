@@ -39,16 +39,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        app:loadUrl="@{``}"
+                        app:loadUrl="@{movie.poster_path}"
                         app:ratio="1.5"
                         tools:src="@tools:sample/backgrounds/scenic" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top|end"
-                        android:layout_margin="4dp"
-                        android:src="@drawable/ic_favorite_true"/>
 
                 </FrameLayout>
 
@@ -58,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/movie_title"

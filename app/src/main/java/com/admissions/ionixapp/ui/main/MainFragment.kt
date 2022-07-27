@@ -22,7 +22,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view).apply { recycler.adapter = adapter }
         mainState = buildMainState()
-        requireActivity().setTheme(R.style.Theme_IonixApp)
         mViewModel.start()
 
         launchAndCollect(mViewModel.state){ state -> binding.uiState = state }

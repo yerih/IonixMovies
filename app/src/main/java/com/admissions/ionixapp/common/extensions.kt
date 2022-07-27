@@ -33,10 +33,6 @@ fun Any.log( value: String = "value?", label: String = "TGB") = Log.i(label, val
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
     LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 
-@BindingAdapter("loadUrl")
-fun ImageView.loadUrl(url: String?){
-    url?.let { Glide.with(context).load(url).into(this) }
-}
 
 inline fun <T> basicDiffUtil(
     crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
