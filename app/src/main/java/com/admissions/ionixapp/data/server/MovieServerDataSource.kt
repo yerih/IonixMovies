@@ -1,5 +1,6 @@
 package com.admissions.ionixapp.data.server
 
+import com.admissions.ionixapp.common.asMovieCasts
 import com.admissions.ionixapp.common.asMovies
 import com.admissions.ionixapp.common.log
 import com.admissions.ionixapp.data.datasource.MovieRemoteDataSource
@@ -15,6 +16,21 @@ class MovieServerDataSource @Inject constructor(private val locationHelper: Loca
         return try {
             val response = MoviesService.service.getPopularMovies()
             Result(response.results.asMovies(), null)
+        }catch (httpExec: HttpException) {
+            val error = httpExec.message.toString()
+            log("error http = $error")
+            Result(null, Error())
+        }catch (e: Exception) {
+            val error = e.message.toString()
+            log("error = $error")
+            Result(null, Error(e.message))
+        }
+    }
+
+    override suspend fun getMovieCredits(id: Int): Result<List<Movie.Cast>> {
+        return try {
+            val response = MoviesService.service.getMovieCredits(id)
+            Result(response.cast.asMovieCasts(), null)
         }catch (httpExec: HttpException) {
             val error = httpExec.message.toString()
             log("error http = $error")

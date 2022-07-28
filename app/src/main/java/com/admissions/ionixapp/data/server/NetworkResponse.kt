@@ -17,3 +17,13 @@ data class GetPopularMoviesResponse(
 }
 
 
+data class MovieCreditsResponse(
+    val cast: List<Cast>,
+) {
+    data class Cast(
+        val character: String,
+        val name: String,
+        val original_name: String,
+        val profile_path: String
+    )
+}

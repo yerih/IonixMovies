@@ -10,7 +10,7 @@ import com.admissions.ionixapp.data.database.MovieRoomDataBase
 import com.admissions.ionixapp.data.datasource.MovieRemoteDataSource
 import com.admissions.ionixapp.data.server.MovieServerDataSource
 import com.admissions.ionixapp.ui.common.LocationHelper
-import com.admissions.ionixapp.usecases.GetPopularMoviesUseCase
+import com.admissions.ionixapp.usecases.MoviesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,5 +58,5 @@ class DataModule {
 class GeneralModule {
 
     @Provides
-    fun userUseCasesProvider(repository: MoviesRepository): GetPopularMoviesUseCase = GetPopularMoviesUseCase(repository)
+    fun userUseCasesProvider(repository: MoviesRepository): MoviesUseCase = MoviesUseCase(repository)
 }

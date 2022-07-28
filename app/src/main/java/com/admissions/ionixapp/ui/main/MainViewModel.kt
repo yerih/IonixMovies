@@ -1,20 +1,17 @@
 package com.admissions.ionixapp.ui.main
 
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.admissions.ionixapp.common.launch
-import com.admissions.ionixapp.common.log
 import com.admissions.ionixapp.domain.Movie
-import com.admissions.ionixapp.usecases.GetPopularMoviesUseCase
+import com.admissions.ionixapp.usecases.MoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val moviesUseCase: GetPopularMoviesUseCase
+    private val moviesUseCase: MoviesUseCase
 ) : ViewModel() {
 
     data class UiState(

@@ -8,6 +8,7 @@ import com.admissions.ionixapp.R
 import com.admissions.ionixapp.common.buildMainState
 import com.admissions.ionixapp.databinding.FragmentMainBinding
 import com.admissions.ionixapp.common.launchAndCollect
+import com.admissions.ionixapp.common.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding = FragmentMainBinding.bind(view).apply { recycler.adapter = adapter }
         mainState = buildMainState()
 
-        launchAndCollect(mViewModel.state){ state -> binding.uiState = state }
+        launchAndCollect(mViewModel.state){ state ->
+            binding.uiState = state
+            if(state.error.isNotEmpty())toast(state.error)
+        }
         mainState.requestLocationPermission { mViewModel.onUiReady() }
     }
 

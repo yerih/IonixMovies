@@ -19,6 +19,15 @@ class MoviesRepository constructor(
             return result
         }else Result(localDataSource.getAll())
     }
+    suspend fun getMovieCredits(id: Int): Result<List<Movie.Cast>> {
+        val result = remoteDataSource.getMovieCredits(id)
+//        if(result.isSuccess){
+//            val movie = localDataSource.findById(id)
+//            movie.cast = result.result!!
+//            localDataSource.save(movie)
+//        }
+        return result
+    }
     suspend fun getMovieInfo(movie: Movie) = remoteDataSource.getMovieInfo(movie)
 
     suspend fun getMoviesFromDB() = localDataSource.getAll()

@@ -1,32 +1,31 @@
 package com.admissions.ionixapp.ui.detail
 
 import androidx.lifecycle.*
+import com.admissions.ionixapp.common.launch
+import com.admissions.ionixapp.common.log
 import com.admissions.ionixapp.domain.Movie
-import com.admissions.ionixapp.usecases.GetPopularMoviesUseCase
+import com.admissions.ionixapp.usecases.MoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val moviesUseCase: GetPopularMoviesUseCase,
+    private val moviesUseCase: MoviesUseCase,
 ) : ViewModel() {
 
-//    private val artistId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).artistId
+    private val movieId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).movieId
 
-    data class UiState(val movie: Movie? = null, val error: Error? = null)
+    data class UiState(val movie: Movie? = null, val error: String = "")
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
-        viewModelScope.launch {
-        }
-    }
-
-    fun onFavoriteClicked() {
-        viewModelScope.launch {
+        launch(Dispatchers.IO) {
+            val movie = moviesUseCase.getMovieById(movieId)
+            _state.update { it.copy(movie = movie) }
         }
     }
 

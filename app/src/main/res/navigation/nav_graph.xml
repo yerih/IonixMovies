@@ -23,5 +23,9 @@
         android:id="@+id/detail_dest"
         android:name="com.admissions.ionixapp.ui.detail.DetailFragment"
         tools:layout="@layout/fragment_detail"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

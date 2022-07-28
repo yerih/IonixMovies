@@ -17,6 +17,7 @@ interface MoviesService {
         private const val urlBase = "https://api.themoviedb.org/3/"
         const val apiKey = "d30e1f350220f9aad6c4110df385d380"
         private const val GET_POPULAR_MOVIES = "discover/movie?sort_by=popularity.desc"
+        private const val GET_CREDITS = "/movie/{movie_id}/credits"
 
         private val okHttpClient1: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.MINUTES)
@@ -41,5 +42,10 @@ interface MoviesService {
 
     @GET(GET_POPULAR_MOVIES)
     suspend fun getPopularMovies(@Query("api_key")api_key: String = apiKey): GetPopularMoviesResponse
+
+    @GET(GET_CREDITS)
+    suspend fun getMovieCredits(@Path("movie_id") movieId: Int,@Query("api_key")api_key: String = apiKey): MovieCreditsResponse
+
+
 }
 
